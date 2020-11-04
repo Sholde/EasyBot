@@ -117,7 +117,7 @@ async def on_message(message):
         stick -= ia
 
         # display
-        await message.channel.send("IA play : {}\n".format(ia))
+        await message.channel.send("AI play : {}\n".format(ia))
         
         if stick < 1:
             await message.channel.send("You win !!!")
