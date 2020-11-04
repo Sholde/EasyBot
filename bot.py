@@ -54,8 +54,17 @@ async def on_message(message):
     if message.content == "help nim":
         await message.channel.send("To start a game : \"start nim\"")
         await message.channel.send("To end a game : \"stop\"")
+        await message.channel.send("To show the state of the bot : \"state\"")
         await message.channel.send("When the game is active type a number between 1 and 3 to delete stick")
 
+    # Show the state of bot
+    if message.content == "state":
+        if user_id:
+            name = bot.get_user(user_id).name
+            await message.channel.send("{} is playing".format(name))
+        else:
+            await message.channel.send("Nobody is playing")
+        
     # Start the party
     if message.content == "start nim":
         # if is not running then begin the party
@@ -95,9 +104,10 @@ async def on_message(message):
         # display
         await message.channel.send("Your play : {}".format(number))
         
-        if stick < 0:
+        if stick < 1:
             await message.channel.send("You lost !!!")
             is_running = False
+            user_id = 0
             return
         
         await message.channel.send("There are {} sticks left !!!".format(stick))
@@ -109,9 +119,10 @@ async def on_message(message):
         # display
         await message.channel.send("IA play : {}\n".format(ia))
         
-        if stick < 0:
+        if stick < 1:
             await message.channel.send("You win !!!")
             is_running = False
+            user_id = 0
             return
 
 
