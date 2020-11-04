@@ -50,6 +50,7 @@ async def on_message(message):
     global is_running
     global user_id
 
+    # Show help
     if message.content == "help nim":
         await message.channel.send("To start a game : \"start nim\"")
         await message.channel.send("To end a game : \"stop\"")
