@@ -96,6 +96,7 @@ async def on_message(message):
         
         if stick < 0:
             await message.channel.send("You lost !!!")
+            is_running = False
             return
         
         await message.channel.send("There are {} sticks left !!!".format(stick))
@@ -109,6 +110,7 @@ async def on_message(message):
         
         if stick < 0:
             await message.channel.send("You win !!!")
+            is_running = False
             return
 
 
