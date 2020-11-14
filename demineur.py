@@ -1,7 +1,12 @@
 import random
+import os
 
 import discord
 from discord.ext import commands
+from dotenv import load_dotenv
+
+load_dotenv()
+DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
 
 client = commands.Bot(command_prefix='!')
 
@@ -251,9 +256,7 @@ async def cheat(input_event,code):
 
 
 def main():
-    fichier = open("token.passwd",'r')
-    token = fichier.read()
-    client.run(token)
+    client.run(DISCORD_TOKEN)
 
 if __name__ == "__main__":
     main()
