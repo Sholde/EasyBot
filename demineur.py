@@ -5,8 +5,8 @@ import discord
 from discord.ext import commands
 from dotenv import load_dotenv
 
-load_dotenv()
-DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
+load_dotenv(dotenv_path="config.env")
+client = discord.Client()
 
 client = commands.Bot(command_prefix='!')
 
@@ -217,13 +217,13 @@ async def aide(message):
     """ 
     affichage de l'aide
     """
-    await message.channel.send("!S ou !start pour commencer une nouvelle partie")
+    await message.channel.send("!G ou !gourou_demineur pour commencer une nouvelle partie")
     await message.channel.send("Les coords commencent par 0 et non 1")
     await message.channel.send("!F ou !flag argX argY pour placer un drapeau ou peut se trouver une mine")
     await message.channel.send("!D ou !demine argX argY pour deminer une case")
 
-@client.command(aliases=['S'])
-async def start(message):
+@client.command(aliases=['G'])
+async def gourou_demineur(message):
     """
     Initialise le jeu 
     """
@@ -254,9 +254,18 @@ async def cheat(input_event,code):
     else:
         await input_event.channel.send("Wrong code")
 
+@client.command(aliases=['E'])
+async def exit(message):
+    """
+    permet de quitter le jeu
+    """
+    global Game_Data
+    Game_Data.is_in_game = False
+    Game_Data.matrice = [] 
+    await message.channel.send("Fin de jeu")
 
 def main():
-    client.run(DISCORD_TOKEN)
+    client.run(os.getenv("TOKEN"))
 
 if __name__ == "__main__":
     main()
